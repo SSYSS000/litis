@@ -1,0 +1,5 @@
+build
+.kdev*
+.cproject
+.settings
+.project
