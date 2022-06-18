@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(progargs
+project(litis
 	LANGUAGES CXX
 	VERSION 1.0.0
 	DESCRIPTION "A library for handling program arguments.")
