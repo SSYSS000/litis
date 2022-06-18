@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string_view>
 #include <string>
 #include "ArgumentStack.hpp"
 #include "Option.hpp"
@@ -16,7 +15,7 @@ struct ScannedArguments
 class ArgumentScanner
 {
 public:
-	ArgumentScanner();
+	ArgumentScanner(OptionScanner* opt_scanner = nullptr);
 
 	void set_option_scanner(OptionScanner* opt_scanner);
 	ScannedArguments scan(ArgumentStack& stack);

@@ -5,8 +5,8 @@
 #include "ArgumentScanner.hpp"
 
 
-ArgumentScanner::ArgumentScanner() :
-	m_opt_scanner(nullptr)
+ArgumentScanner::ArgumentScanner(OptionScanner* opt_scanner) :
+	m_opt_scanner(opt_scanner)
 {
 }
 
