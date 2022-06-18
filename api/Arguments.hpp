@@ -1,13 +1,14 @@
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "OptionMap.hpp"
 
-template<typename AccessorT>
+template <typename AccessorT>
 struct Arguments
 {
-	std::string executable;
-	OptionMap<AccessorT> options;
-	std::vector<std::string> operands;
+    std::string executable;
+    OptionMap<AccessorT> options;
+    std::vector<std::string> operands;
 };
