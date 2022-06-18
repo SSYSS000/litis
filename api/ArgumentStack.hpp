@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <stack>
-#include <string_view>
+#include <string>
 
-using ArgumentStack = std::stack<std::string_view, std::vector<std::string_view>>;
+using ArgumentStack = std::stack<std::string, std::vector<std::string>>;
 
 ArgumentStack make_arg_stack(int argc, const char* const* argv);
