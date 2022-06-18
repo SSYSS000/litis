@@ -10,7 +10,10 @@ add_executable(libprogargs
 	api/ArgumentScanner.hpp
 	src/OptionScanner.cpp
 	api/OptionScanner.hpp
-	src/OptionEqScanner.cpp)
+	src/OptionEqScanner.cpp
+	api/OptionEqScanner.hpp
+	src/OptionSpScanner.cpp
+	api/OptionSpScanner.hpp)
 
 target_include_directories(libprogargs PRIVATE api/)
 
