@@ -57,7 +57,7 @@ bool OptionSpScanner::is_value_expected(const std::string& option_no_pfx) const
     return m_value_opts.find(option_no_pfx) != m_value_opts.cend();
 }
 
-bool OptionSpScanner::scan_next(ArgumentStack& stack, std::vector<Option>& out)
+bool OptionSpScanner::scan_next(StringStack& stack, std::vector<Option>& out)
 {
     if (!m_opt_scanning)
     {

@@ -44,7 +44,7 @@ public:
                     std::string long_opt_prefix  = "--",
                     std::string end_of_opts      = "--");
 
-    bool scan_next(ArgumentStack& stack, std::vector<Option>& out) override;
+    bool scan_next(StringStack& stack, std::vector<Option>& out) override;
 
 private:
     char m_opt_value_delimiter = '=';

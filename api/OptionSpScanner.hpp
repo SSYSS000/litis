@@ -35,7 +35,7 @@
 #include <string>
 #include <vector>
 
-#include "ArgumentStack.hpp"
+#include "StringStack.hpp"
 #include "OptionScanner.hpp"
 
 class Option;
@@ -49,7 +49,7 @@ public:
 
     void expect_value(std::string option_no_pfx);
 
-    bool scan_next(ArgumentStack& stack, std::vector<Option>& out) override;
+    bool scan_next(StringStack& stack, std::vector<Option>& out) override;
 
 private:
     bool is_value_expected(char option_no_pfx) const;

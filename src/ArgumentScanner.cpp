@@ -32,7 +32,7 @@
 #include <vector>
 
 #include "ArgumentScanner.hpp"
-#include "ArgumentStack.hpp"
+#include "StringStack.hpp"
 #include "Option.hpp"
 #include "OptionScanner.hpp"
 
@@ -46,7 +46,7 @@ void ArgumentScanner::set_option_scanner(OptionScanner* opt_scanner)
     m_opt_scanner = opt_scanner;
 }
 
-ScannedArguments ArgumentScanner::scan(ArgumentStack& stack)
+ScannedArguments ArgumentScanner::scan(StringStack& stack)
 {
     ScannedArguments scanned;
 

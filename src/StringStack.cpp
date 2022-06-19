@@ -31,11 +31,11 @@
  */
 #include <iterator>
 
-#include "ArgumentStack.hpp"
+#include "StringStack.hpp"
 
-ArgumentStack make_arg_stack(int argc, const char* const* argv)
+StringStack make_string_stack(int count, const char* const* strings)
 {
-    return ArgumentStack(
-        std::vector<std::string>(std::make_reverse_iterator(argv + argc),
-                                 std::make_reverse_iterator(argv)));
+    return StringStack(
+        std::vector<std::string>(std::make_reverse_iterator(strings + count),
+                                 std::make_reverse_iterator(strings)));
 }

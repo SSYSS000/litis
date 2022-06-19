@@ -51,7 +51,7 @@ OptionEqScanner::OptionEqScanner(std::string short_opt_prefix,
 {
 }
 
-bool OptionEqScanner::scan_next(ArgumentStack& stack, std::vector<Option>& out)
+bool OptionEqScanner::scan_next(StringStack& stack, std::vector<Option>& out)
 {
     if (!m_opt_scanning)
     {

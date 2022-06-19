@@ -48,7 +48,7 @@ OptionMap<MyOpt> options_to_map(const std::vector<Option>& options)
 
 OptionMap<MyOpt> just_give_me_the_damn_map(int argc, char** argv)
 {
-    ArgumentStack stack = make_arg_stack(argc, argv);
+    StringStack stack = make_string_stack(argc, argv);
 
     OptionSpScanner opt_scanner(SHORT_OPT_PREFIX, LONG_OPT_PREFIX, END_OF_OPTS);
 

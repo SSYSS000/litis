@@ -7,7 +7,7 @@ project(litis
 
 add_library(${PROJECT_NAME} SHARED
 	src/main.cpp
-	src/ArgumentStack.cpp 	api/ArgumentStack.hpp
+	src/StringStack.cpp 	api/StringStack.hpp
 	src/Option.cpp		api/Option.hpp
 	src/ArgumentScanner.cpp api/ArgumentScanner.hpp
 	src/OptionScanner.cpp	api/OptionScanner.hpp

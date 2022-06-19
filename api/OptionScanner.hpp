@@ -34,7 +34,7 @@
 #include <optional>
 #include <string>
 
-#include "ArgumentStack.hpp"
+#include "StringStack.hpp"
 #include "Option.hpp"
 
 class OptionScanner
@@ -45,7 +45,7 @@ public:
 
     virtual ~OptionScanner() = default;
 
-    virtual bool scan_next(ArgumentStack& stack, std::vector<Option>& out) = 0;
+    virtual bool scan_next(StringStack& stack, std::vector<Option>& out) = 0;
 
 protected:
     bool is_option(const std::string& prefix, const std::string& str);

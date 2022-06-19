@@ -35,6 +35,6 @@
 #include <string>
 #include <vector>
 
-using ArgumentStack = std::stack<std::string, std::vector<std::string>>;
+using StringStack = std::stack<std::string, std::vector<std::string>>;
 
-ArgumentStack make_arg_stack(int argc, const char* const* argv);
+StringStack make_string_stack(int count, const char* const* strings);
