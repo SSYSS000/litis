@@ -6,7 +6,6 @@ project(litis
 	DESCRIPTION "A library for handling program arguments.")
 
 add_library(${PROJECT_NAME} SHARED
-	src/main.cpp
 	src/StringStack.cpp 	api/StringStack.hpp
 	src/Option.cpp		api/Option.hpp
 	src/ArgumentScanner.cpp api/ArgumentScanner.hpp
