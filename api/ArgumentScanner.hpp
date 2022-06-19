@@ -33,7 +33,6 @@
 
 #include <string>
 
-#include "StringStack.hpp"
 #include "Option.hpp"
 
 class OptionScanner;
@@ -50,7 +49,7 @@ public:
     ArgumentScanner(OptionScanner* opt_scanner = nullptr);
 
     void set_option_scanner(OptionScanner* opt_scanner);
-    ScannedArguments scan(StringStack& stack);
+    ScannedArguments scan(int argc, const char* const* argv);
 
 private:
     OptionScanner* m_opt_scanner;

@@ -32,9 +32,9 @@
 #include <vector>
 
 #include "ArgumentScanner.hpp"
-#include "StringStack.hpp"
 #include "Option.hpp"
 #include "OptionScanner.hpp"
+#include "StringStack.hpp"
 
 ArgumentScanner::ArgumentScanner(OptionScanner* opt_scanner) :
     m_opt_scanner(opt_scanner)
@@ -46,19 +46,20 @@ void ArgumentScanner::set_option_scanner(OptionScanner* opt_scanner)
     m_opt_scanner = opt_scanner;
 }
 
-ScannedArguments ArgumentScanner::scan(StringStack& stack)
+ScannedArguments ArgumentScanner::scan(int argc, const char* const* argv)
 {
     ScannedArguments scanned;
+    StringStack args = make_string_stack(argc, argv);
 
     // Loop through all the arguments.
-    while (!stack.empty())
+    while (!args.empty())
     {
-        if (m_opt_scanner && m_opt_scanner->scan_next(stack, scanned.options))
+        if (m_opt_scanner && m_opt_scanner->scan_next(args, scanned.options))
             ; // Option scanner handled this argument.
         else
         {
-            scanned.operands.emplace_back(stack.top());
-            stack.pop();
+            scanned.operands.emplace_back(args.top());
+            args.pop();
         }
     }
 
