@@ -30,8 +30,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <algorithm>
-#include <cassert>
 #include <cctype>
+#include <stdexcept>
 
 #include "OptionScanner.hpp"
 
@@ -48,7 +48,11 @@ OptionScanner::OptionScanner(std::string short_opt_prefix,
     m_long_opt_prefix(std::move(long_opt_prefix)),
     m_end_of_opts(std::move(end_of_opts))
 {
-    assert(m_short_opt_prefix.length() < m_long_opt_prefix.length());
+    if (!(m_short_opt_prefix.length() < m_long_opt_prefix.length()))
+    {
+        throw std::invalid_argument("Short option prefix must be shorter than "
+                                    "long option prefix.");
+    }
 }
 
 bool OptionScanner::is_option(const std::string& prefix, const std::string& str)
