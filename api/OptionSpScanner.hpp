@@ -35,24 +35,68 @@
 #include <string>
 #include <vector>
 
-#include "StringStack.hpp"
 #include "OptionScanner.hpp"
+#include "StringStack.hpp"
+
+namespace litis
+{
 
 class Option;
 
+/**
+ * @brief OptionScanner that scans options whose values
+ *        can be separated by whitespace, e.g. "--option value".
+ *
+ */
 class OptionSpScanner : public OptionScanner
 {
 public:
+    /**
+     * @brief Construct an OptionSpScanner.
+     *
+     * @param short_opt_prefix Short option prefix.
+     * @param long_opt_prefix Long option prefix.
+     * @param end_of_opts No more options are expected after this string.
+     */
     OptionSpScanner(std::string short_opt_prefix = "-",
                     std::string long_opt_prefix  = "--",
                     std::string end_of_opts      = "--");
 
+    /**
+     * @brief Set an option to expect a value.
+     *
+     * @param option_no_pfx Option without its prefix string.
+     */
     void expect_value(std::string option_no_pfx);
 
-    bool scan_next(StringStack& stack, std::vector<Option>& out) override;
+    /**
+     * @brief Scan the next argument and store it in out if it's an option.
+     *
+     * @param args Command-line arguments.
+     * @param out Scanned options are appended to this vector.
+     * @return bool True if the argument was recognized and handled, false if
+     * not.
+     */
+    bool scan_next(StringStack& args, std::vector<Option>& out) override;
 
 private:
+    /**
+     * @brief Check if an option expects a value.
+     *
+     * @param option_no_pfx Option without its prefix string.
+     * @return bool True if value expected, false otherwise.
+     */
     bool is_value_expected(char option_no_pfx) const;
+
+    /**
+     * @brief Check if an option expects a value.
+     *
+     * @param option_no_pfx Option without its prefix string.
+     * @return bool True if value expected, false otherwise.
+     */
     bool is_value_expected(const std::string& option_no_pfx) const;
+
     std::set<std::string> m_value_opts;
 };
+
+} // namespace litis

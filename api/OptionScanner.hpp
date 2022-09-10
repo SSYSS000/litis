@@ -34,22 +34,68 @@
 #include <optional>
 #include <string>
 
-#include "StringStack.hpp"
 #include "Option.hpp"
+#include "StringStack.hpp"
 
+namespace litis
+{
+
+/**
+ * @brief A base class for option scanners.
+ *
+ */
 class OptionScanner
 {
 public:
+    /**
+     * @brief Construct an option scanner.
+     *
+     * @param short_opt_prefix Short option prefix.
+     * @param long_opt_prefix Long option prefix.
+     * @param end_of_opts No more options are expected after this string.
+     */
     OptionScanner(std::string short_opt_prefix, std::string long_opt_prefix,
                   std::string end_of_opts);
 
+    /**
+     * @brief Destruct this OptionScanner.
+     */
     virtual ~OptionScanner() = default;
 
-    virtual bool scan_next(StringStack& stack, std::vector<Option>& out) = 0;
+    /**
+     * @brief Scan the next argument and store it in out if it's an option.
+     *
+     * @param args Command-line arguments.
+     * @param out Scanned options are appended to this vector.
+     * @return bool True if the argument was recognized and handled, false if
+     * not.
+     */
+    virtual bool scan_next(StringStack& args, std::vector<Option>& out) = 0;
 
 protected:
+    /**
+     * @brief Check if a string is prefixed by prefix.
+     *
+     * @param prefix String prefix.
+     * @param str A string.
+     * @return bool True if prefix exists, false if not.
+     */
     bool is_option(const std::string& prefix, const std::string& str);
+
+    /**
+     * @brief Check if a string is a long option.
+     *
+     * @param str A string.
+     * @return bool True if long option, false otherwise.
+     */
     bool is_long_option(const std::string& str);
+
+    /**
+     * @brief Check if a string is a short option.
+     *
+     * @param str A string.
+     * @return bool True if short option, false otherwise.
+     */
     bool is_short_option(const std::string& str);
 
     bool m_opt_scanning = true;
@@ -57,3 +103,5 @@ protected:
     std::string m_long_opt_prefix;
     std::string m_end_of_opts;
 };
+
+} // namespace litis

@@ -36,6 +36,9 @@
 #include "OptionScanner.hpp"
 #include "StringStack.hpp"
 
+namespace litis
+{
+
 ArgumentScanner::ArgumentScanner(OptionScanner* opt_scanner) :
     m_opt_scanner(opt_scanner)
 {
@@ -58,10 +61,12 @@ ScannedArguments ArgumentScanner::scan(int argc, const char* const* argv)
             ; // Option scanner handled this argument.
         else
         {
-            scanned.operands.emplace_back(args.top());
+            scanned.operands.push_back(std::move(args.top()));
             args.pop();
         }
     }
 
     return scanned;
 }
+
+} // namespace litis

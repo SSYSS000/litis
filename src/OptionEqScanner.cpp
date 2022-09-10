@@ -34,6 +34,9 @@
 
 #include "OptionEqScanner.hpp"
 
+namespace litis
+{
+
 std::pair<std::string, std::string> split_at_first(char delim,
                                                    const std::string& str)
 {
@@ -51,14 +54,14 @@ OptionEqScanner::OptionEqScanner(std::string short_opt_prefix,
 {
 }
 
-bool OptionEqScanner::scan_next(StringStack& stack, std::vector<Option>& out)
+bool OptionEqScanner::scan_next(StringStack& args, std::vector<Option>& out)
 {
     if (!m_opt_scanning)
     {
         return false;
     }
 
-    std::string& arg = stack.top();
+    std::string& arg = args.top();
 
     if (arg == m_end_of_opts)
     {
@@ -83,6 +86,8 @@ bool OptionEqScanner::scan_next(StringStack& stack, std::vector<Option>& out)
         return false;
     }
 
-    stack.pop();
+    args.pop();
     return true;
 }
+
+} // namespace litis

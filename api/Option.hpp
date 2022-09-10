@@ -33,8 +33,11 @@
 
 #include <string>
 
+namespace litis
+{
+
 /**
- * @brief Describes an option that is part of a command.
+ * @brief Describes an option that is part of a command-line.
  *
  */
 class Option
@@ -74,3 +77,5 @@ private:
     std::string m_name;
     std::string m_value;
 };
+
+} // namespace litis

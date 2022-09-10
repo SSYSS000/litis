@@ -35,6 +35,19 @@
 #include <string>
 #include <vector>
 
+namespace litis
+{
+
 using StringStack = std::stack<std::string, std::vector<std::string>>;
 
+/**
+ * @brief Create a stack of strings from an array of C-strings, putting
+ *        the first string on top of the stack.
+ *
+ * @param count Number of strings in the array.
+ * @param strings Array of C-strings.
+ * @return StringStack Stack of strings.
+ */
 StringStack make_string_stack(int count, const char* const* strings);
+
+} // namespace litis

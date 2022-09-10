@@ -35,42 +35,89 @@
 #include <string>
 #include <vector>
 
-template <typename AccessorT>
+namespace litis
+{
+
+/**
+ * @brief A map for accessing option values.
+ *
+ */
+template <typename KeyType>
 class OptionMap
 {
 public:
+    /**
+     * @brief Construct an empty OptionMap.
+     *
+     */
     OptionMap() = default;
 
-    bool is_set(const AccessorT& id) const
+    /**
+     * @brief Check if an option is set.
+     *
+     * @param key Option key.
+     * @return bool True if set, false otherwise.
+     */
+    bool is_set(const KeyType& key) const
     {
-        return m_options.find(id) != m_options.cend();
+        return m_options.find(key) != m_options.cend();
     }
 
-    void unset(const AccessorT& id)
+    /**
+     * @brief Unset an option, deleting it from this map.
+     *
+     * @param key Option key.
+     */
+    void unset(const KeyType& key)
     {
-        m_options.erase(id);
+        m_options.erase(key);
     }
 
-    void add(AccessorT id, std::string value)
+    /**
+     * @brief Add a value to an option.
+     *
+     * @param key Option key.
+     * @param value New option value.
+     */
+    void add(KeyType key, std::string value)
     {
-        m_options[std::move(id)].push_back(std::move(value));
+        m_options[std::move(key)].push_back(std::move(value));
     }
 
-    void set(AccessorT id, std::string value = "")
+    /**
+     * @brief Set the sole value of an option.
+     *
+     * @param key Option key.
+     * @param value New option value.
+     */
+    void set(KeyType key, std::string value)
     {
-        m_options[std::move(id)] = {std::move(value)};
+        m_options[std::move(key)] = {std::move(value)};
     }
 
-    const std::string& get_value(const AccessorT& id) const
+    /**
+     * @brief Get the latest value assigned to an option.
+     *
+     * @param key Option key.
+     * @return Option value.
+     */
+    const std::string& get_value(const KeyType& key) const
     {
-        return m_options.at(id).back();
+        return m_options.at(key).back();
     }
 
-    bool try_get_value(const AccessorT& id, std::string& value) const
+    /**
+     * @brief Try to get the value of an option with get_value().
+     *
+     * @param key Option key.
+     * @param value Location to store the value at.
+     * @return bool True if value was available and stored, false otherwise.
+     */
+    bool try_get_value(const KeyType& key, std::string& value) const
     {
         try
         {
-            value = this->get_value(id);
+            value = this->get_value(key);
         }
         catch (const std::out_of_range& e)
         {
@@ -79,9 +126,15 @@ public:
         return true;
     }
 
-    std::vector<std::string> values(const AccessorT& id) const
+    /**
+     * @brief Get all values assigned to an option.
+     *
+     * @param key Option key.
+     * @return Values assigned to option.
+     */
+    std::vector<std::string> values(const KeyType& key) const
     {
-        auto it = m_options.find(id);
+        auto it = m_options.find(key);
         if (it != m_options.cend())
         {
             return it->second;
@@ -90,5 +143,7 @@ public:
     }
 
 private:
-    std::map<AccessorT, std::vector<std::string>> m_options;
+    std::map<KeyType, std::vector<std::string>> m_options;
 };
+
+} // namespace litis

@@ -35,6 +35,9 @@
 
 #include "OptionScanner.hpp"
 
+namespace litis
+{
+
 bool starts_with(const std::string& prefix, const std::string& operand)
 {
     return operand.length() >= prefix.length() &&
@@ -76,3 +79,5 @@ bool OptionScanner::is_short_option(const std::string& str)
 {
     return is_option(m_short_opt_prefix, str);
 }
+
+} // namespace litis

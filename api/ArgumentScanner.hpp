@@ -36,22 +36,63 @@
 
 #include "Option.hpp"
 
+namespace litis
+{
+
 class OptionScanner;
 
+/**
+ * @brief Stores scanned option arguments as Option class instances and
+ *        non-option arguments as plain strings.
+ *
+ */
 struct ScannedArguments
 {
+    /*
+     * Contains everything but the options and their values.
+     * The first string in the vector is the first non-option argument, which
+     * is typically the program executable name.
+     */
     std::vector<std::string> operands;
+
+    /*
+     * Contains all options recognized by an option scanner.
+     */
     std::vector<Option> options;
 };
 
+/**
+ * @brief Responsible for scanning command-line arguments.
+ *
+ */
 class ArgumentScanner
 {
 public:
+    /**
+     * @brief Create an ArgumentScanner instance.
+     *
+     * @param opt_scanner Scanner used to scan command-line options.
+     */
     ArgumentScanner(OptionScanner* opt_scanner = nullptr);
 
+    /**
+     * @brief Set the scanner used to scan command-line options.
+     *
+     * @param opt_scanner Scanner used to scan command-line options.
+     */
     void set_option_scanner(OptionScanner* opt_scanner);
+
+    /**
+     * @brief Scan command-line arguments.
+     *
+     * @param argc Number of command-line arguments.
+     * @param argv Command-line argument array.
+     * @return ScannedArguments The results of the scan.
+     */
     ScannedArguments scan(int argc, const char* const* argv);
 
 private:
     OptionScanner* m_opt_scanner;
 };
+
+} // namespace litis

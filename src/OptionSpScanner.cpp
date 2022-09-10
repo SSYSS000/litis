@@ -34,6 +34,9 @@
 
 #include "OptionSpScanner.hpp"
 
+namespace litis
+{
+
 OptionSpScanner::OptionSpScanner(std::string short_opt_prefix,
                                  std::string long_opt_prefix,
                                  std::string end_of_opts) :
@@ -57,15 +60,15 @@ bool OptionSpScanner::is_value_expected(const std::string& option_no_pfx) const
     return m_value_opts.find(option_no_pfx) != m_value_opts.cend();
 }
 
-bool OptionSpScanner::scan_next(StringStack& stack, std::vector<Option>& out)
+bool OptionSpScanner::scan_next(StringStack& args, std::vector<Option>& out)
 {
     if (!m_opt_scanning)
     {
         return false;
     }
 
-    std::string arg = std::move(stack.top());
-    stack.pop();
+    std::string arg = std::move(args.top());
+    args.pop();
 
     if (arg == m_end_of_opts)
     {
@@ -74,10 +77,10 @@ bool OptionSpScanner::scan_next(StringStack& stack, std::vector<Option>& out)
     else if (is_long_option(arg))
     {
         arg.erase(0, m_long_opt_prefix.length());
-        if (!stack.empty() && is_value_expected(arg))
+        if (!args.empty() && is_value_expected(arg))
         {
-            out.emplace_back(std::move(arg), std::move(stack.top()));
-            stack.pop();
+            out.emplace_back(std::move(arg), std::move(args.top()));
+            args.pop();
         }
         else
         {
@@ -93,10 +96,10 @@ bool OptionSpScanner::scan_next(StringStack& stack, std::vector<Option>& out)
             out.emplace_back(*it, "");
         }
 
-        if (!stack.empty() && is_value_expected(arg.back()))
+        if (!args.empty() && is_value_expected(arg.back()))
         {
-            out.emplace_back(arg.back(), std::move(stack.top()));
-            stack.pop();
+            out.emplace_back(arg.back(), std::move(args.top()));
+            args.pop();
         }
         else
         {
@@ -106,9 +109,11 @@ bool OptionSpScanner::scan_next(StringStack& stack, std::vector<Option>& out)
     else
     {
         // Put the argument back on the stack.
-        stack.push(std::move(arg));
+        args.push(std::move(arg));
         return false;
     }
 
     return true;
 }
+
+} // namespace litis

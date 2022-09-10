@@ -33,6 +33,9 @@
 
 #include <string>
 
+namespace litis
+{
+
 struct OptionInfo
 {
     OptionInfo(std::string short_opt, std::string long_opt = "",
@@ -48,3 +51,5 @@ struct OptionInfo
     std::string about;
     std::string value_name;
 };
+
+} // namespace litis

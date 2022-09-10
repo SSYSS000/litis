@@ -33,6 +33,9 @@
 
 #include "Option.hpp"
 
+namespace litis
+{
+
 Option::Option(char name, std::string value) :
     m_name(1, name), m_value(std::move(value))
 {
@@ -52,3 +55,5 @@ const std::string& Option::value() const
 {
     return m_value;
 }
+
+} // namespace litis

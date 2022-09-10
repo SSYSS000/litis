@@ -33,9 +33,14 @@
 
 #include "StringStack.hpp"
 
+namespace litis
+{
+
 StringStack make_string_stack(int count, const char* const* strings)
 {
     return StringStack(
         std::vector<std::string>(std::make_reverse_iterator(strings + count),
                                  std::make_reverse_iterator(strings)));
 }
+
+} // namespace litis
