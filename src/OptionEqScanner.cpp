@@ -34,7 +34,7 @@
 
 #include "OptionEqScanner.hpp"
 
-namespace litis
+namespace
 {
 
 std::pair<std::string, std::string> split_at_first(char delim,
@@ -45,6 +45,11 @@ std::pair<std::string, std::string> split_at_first(char delim,
         std::string(str.begin(), bndry),
         std::string(bndry == str.end() ? bndry : bndry + 1, str.end()));
 }
+
+} // namespace
+
+namespace litis
+{
 
 OptionEqScanner::OptionEqScanner(std::string short_opt_prefix,
                                  std::string long_opt_prefix,
